@@ -31,13 +31,19 @@ export const validateUser = (payload: unknown): User => {
 export class UserServices {
     dao: UsersDao;
     constructor(dao: UsersDao) {
-        this.dao = dao
+        this.dao = dao;
     }
 
     async createUser (resource: User) {
-        const userIsValid = validateUser(resource)
+        const userIsValid = validateUser(resource);
         if (userIsValid) await this.dao.add(userIsValid);
         
+    }
+
+    async findUserById (userId: number) {
+        const user = await this.dao.find(userId);
+        if (!user) throw new Error ('coundn\'t find user with this id');
+        return user;
     }
 
 }

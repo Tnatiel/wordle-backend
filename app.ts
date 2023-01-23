@@ -9,6 +9,7 @@ import { UsersDao } from './dao/users/UsersDao';
 export const app = express()
 
 app.use(cors());
+app.use(express.json())
 app.use('/word',wordRouter);
 
 const userController = new UserController(app, new UserServices( new UsersDao()))

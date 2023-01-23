@@ -23,7 +23,7 @@ export  class UsersDao extends CrudDao<User> {
 
     
 
-    async add(t: User): Promise<boolean> {
+    async add (t: User): Promise<boolean> {
         try {
             const hashedPassword = await hashPassword(t.password)
             const query = {
@@ -33,22 +33,34 @@ export  class UsersDao extends CrudDao<User> {
             const res = await this.client.query(query)
             return true;
         } catch (e) {
-            console.log(e);
             return false;
         }
 
     }
-    
 
-    remove(t: User): boolean {
+
+    remove (t: User): boolean {
         throw new Error("Method not implemented.")
     }
 
-    edit(t: User): Promise<User> {
+    edit (t: User): Promise<User> {
         throw new Error("Method not implemented.")
     }
 
-    find(t: User): Promise<User> {
-        throw new Error("Method not implemented.")
+    async find (userId: number): Promise<User> {
+        console.log('in dao')
+        const query = {
+            text: 'SELECT * FROM public.users WHERE user_id = $1',
+            values: [userId]
+        }
+
+        try {
+            const res = await this.client.query(query)
+            console.log('trying', res)
+            return res.rows[0];
+        } catch (e) {
+            console.log(e);
+        }
+
     }
 }

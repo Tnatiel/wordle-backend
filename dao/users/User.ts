@@ -2,12 +2,14 @@ import e from "express";
 
 
 export class User {
+    id: number
     email: string;
     fname: string;
     lname: string;
     password: string;
 
-    constructor(email='', fname='', lname='', password='') {
+    constructor(id=-1, email='', fname='', lname='', password='') {
+        this.id =id,
         this.email = email,
         this.fname = fname,
         this.lname = lname,
