@@ -7,7 +7,7 @@ export const validateUser = (payload: unknown): User => {
     if  (!payload) {
         throw new Error('empty value is not a user');
     }
-    const {email, lname, fname, password} = payload as User;
+    const {email, fname, lname, password} = payload as User;
 
     if (!validator.isEmail(email)) {
         throw new Error('email not valid');
@@ -28,10 +28,10 @@ export const validateUser = (payload: unknown): User => {
     return payload as User;
 }
 
-export class UserSevices {
+export class UserServices {
     dao: UsersDao;
-    constructor() {
-        this.dao = new UsersDao()
+    constructor(dao: UsersDao) {
+        this.dao = dao
     }
 
     async createUser (resource: User) {

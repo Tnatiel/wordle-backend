@@ -4,7 +4,8 @@ import { CrudDao } from "../DaoCrud";
 import { User } from "./User";
 import bcrypt from 'bcrypt';
 
-export  const hashPassword = async (password: string, saltRounds: number): Promise<string> => {
+const saltRounds = 10
+export  const hashPassword = async (password: string): Promise<string> => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hash = await bcrypt.hash(password, salt);
     return hash;
@@ -24,10 +25,9 @@ export  class UsersDao extends CrudDao<User> {
 
     async add(t: User): Promise<boolean> {
         try {
-
-            const hashedPassword = await hashPassword(t.password, 10)
+            const hashedPassword = await hashPassword(t.password)
             const query = {
-                text: 'INSERT INTO public.users(email, fname, lname, userToken) VALUES ($1, $2, $3, $4)',
+                text: 'INSERT INTO public.users(email, fname, lname, user_token) VALUES ($1, $2, $3, $4)',
                 values: [t.email, t.fname, t.lname, hashedPassword]
             }
             const res = await this.client.query(query)
