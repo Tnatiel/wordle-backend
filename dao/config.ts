@@ -19,4 +19,3 @@ export const createConnection = () => {
     return client;
 }
 
-createConnection()
