@@ -22,7 +22,9 @@
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/pg": "^8.6.6",
+    "@types/validator": "^13.7.10",
     "bcrypt": "^5.1.0",
-    "pg": "^8.8.0"
+    "pg": "^8.8.0",
+    "validator": "^13.7.0"
   }
 }
