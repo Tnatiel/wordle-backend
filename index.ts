@@ -1,6 +1,6 @@
 import { app } from "./app";
 
 
-app.listen(3003, () => {
+app.listen(3333, () => {
     console.log('server is up!')
 });

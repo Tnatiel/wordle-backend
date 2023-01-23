@@ -3,7 +3,7 @@ import express, { Router, Request, Response } from "express";
 export const wordRouter = Router();
 
 
-const word = 'MORAL'
+const word = 'MORAL';
 
 wordRouter.get('/', (req: Request, res: Response) => {
     res.status(200).send(word)
