@@ -3,11 +3,14 @@
 DROP TABLE IF EXISTS words;
 
 CREATE TABLE words (
-	word VARCHAR(50) PRIMARY KEY,
-	used BOOLEAN
+	word_id SERIAL PRIMARY KEY,
+	used BOOLEAN DEFAULT FALSE,
+	word_encrypted BOOLEAN DEFAULT FALSE,
+	word VARCHAR(255) NOT NULL,
+	word_token VARCHAR(255)
 );
 
-INSERT INTO  words (word, used)
+INSERT INTO  words(word, used)
 VALUES
 ('abbey', false),
 ('about', false),

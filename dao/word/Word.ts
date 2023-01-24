@@ -1,10 +1,10 @@
-
-
 export class Word {
-    word: string;
-    used: boolean;
-    constructor(word='', used=false) {
-        this.word = word,
-        this.used = used
-    }
+  wordId: number;
+  used: boolean;
+  wordEncrypted: boolean;
+  word: string;
+  wordToken: string;
+  constructor(wordId = -1, used = false, wordEncrypted = false, word = '', wordToken = '') {
+    (this.wordId = wordId), (this.used = used), (this.wordEncrypted = wordEncrypted), (this.word = word), (this.wordToken = wordToken);
+  }
 }
