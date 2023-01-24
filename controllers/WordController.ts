@@ -14,5 +14,13 @@ export class WordController {
       const word = await this.wordServices.findWordById(+wordId);
       res.status(200).send(word);
     });
+
+    this.server.put('/word/set-used', async (req: Request, res: Response) => {
+      const word = req.body.word;
+      console.log('server worf' ,word)
+      const updateResult = await this.wordServices.setUsed(word)
+      if (!updateResult) res.status(404).send(`update result: ${updateResult}`)
+      res.status(200).send(updateResult);
+    });
   }
 }

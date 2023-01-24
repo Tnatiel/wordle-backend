@@ -3,7 +3,6 @@ import { createConnection } from '../config';
 import { CrudDao } from '../DaoCrud';
 import { User } from './User';
 import bcrypt from 'bcrypt';
-import { addSyntheticTrailingComment } from 'typescript';
 
 export const hashData = async (data: unknown, rounds: number) => {
   const saltRounds = rounds;
