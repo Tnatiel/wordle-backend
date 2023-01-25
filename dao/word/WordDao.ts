@@ -48,7 +48,7 @@ export class WordDao {
 
   async find (wordId: number): Promise<Word> {
     const query = {
-      text: 'SELECT * FROM public.words WHERE word = $1',
+      text: 'SELECT * FROM public.words WHERE word_id=$1',
       values: [wordId],
     };
 
@@ -60,24 +60,20 @@ export class WordDao {
     }
   }
 
-  async getRandomWord () {
-    const wordsLength = await this.getAllWordsLength();
-    const randomWordId = Math.floor(Math.random() * wordsLength);
-    const randomWord = await this.find(randomWordId);
-    return randomWord; 
-  }
 
- protected async getAllWordsLength () {
+ async getRandomWord () {
   const query = {
-    text: 'SELECT * FROM public.words',
-    // values: [],
+    text: 'SELECT * FROM words ORDER BY RANDOM() LIMIT 1;',
+    values: [],
   };
-
+  
   try {
     const res = await this.client.query(query);
-    return res.rows.length;
+    console.log(res)
+    
+    return res.rows[0]
   } catch (e) {
-    console.log('couldn\'t get words length', e);
+    console.log('couldn\'t get random word', e);
   }
  }
 }

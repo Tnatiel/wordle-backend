@@ -8,14 +8,34 @@ export class WordServices {
   }
 
   async findWordById (WordId: number) {
-    const word = await this.dao.find(WordId);
-    return word;
+    try {
+      const word = await this.dao.find(WordId);
+      return word;
+    } catch (e) {
+      console.log(e);
+       throw new Error(e.message);
+    }
   }
 
   async setUsed (word: string) {
-    const updateWord = await this.dao.setWordAsUsed(word);
-    console.log('services word status:', updateWord)
-    // if (!updateWord) 
-    return updateWord;
+    try {
+      const updateWord = await this.dao.setWordAsUsed(word);
+      return updateWord;
+    } catch (e) {
+      console.log (e);
+       throw new Error(e.message);
+    }
   }
+
+  async getRandomWordFromDb() {
+    try {
+      
+      const randomWord = await this.dao.getRandomWord();
+      return randomWord;
+    } catch (e) {
+      console.log(e);
+       throw new Error(e.message);
+    }
+  }
+  
 }
