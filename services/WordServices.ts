@@ -1,5 +1,7 @@
-import { Word } from '../dao/word/Word';
+
 import { WordDao } from '../dao/word/WordDao';
+import { encrypt } from '../functions';
+
 
 export class WordServices {
   dao: WordDao;
@@ -7,31 +9,15 @@ export class WordServices {
     this.dao = dao;
   }
 
-  async findWordById (WordId: number) {
+  async getRandomWordData() {
+    
     try {
-      const word = await this.dao.find(WordId);
-      return word;
-    } catch (e) {
-      console.log(e);
-       throw new Error(e.message);
-    }
-  }
+      const randomWord = await this.dao.getRandomWordFromDb();
+      if (randomWord) {
+        const wordHash = encrypt(randomWord.word);
+        return wordHash;
+      }
 
-  async setUsed (word: string) {
-    try {
-      const updateWord = await this.dao.setWordAsUsed(word);
-      return updateWord;
-    } catch (e) {
-      console.log (e);
-       throw new Error(e.message);
-    }
-  }
-
-  async getRandomWordFromDb() {
-    try {
-      
-      const randomWord = await this.dao.getRandomWord();
-      return randomWord;
     } catch (e) {
       console.log(e);
        throw new Error(e.message);
@@ -39,3 +25,5 @@ export class WordServices {
   }
   
 }
+
+
