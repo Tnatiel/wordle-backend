@@ -1,6 +1,6 @@
 
 import { WordDao } from '../dao/word/WordDao';
-import { encrypt } from '../functions';
+import { checkPosition, decrypt, encrypt, WordHash } from '../functions';
 
 
 export class WordServices {
@@ -22,6 +22,12 @@ export class WordServices {
       console.log(e);
        throw new Error(e.message);
     }
+  }
+
+  async checkGuess (guess: string, wordData: WordHash){
+    const gameWord = decrypt(wordData);
+    const result = checkPosition(guess, gameWord.toUpperCase());
+    return result
   }
   
 }

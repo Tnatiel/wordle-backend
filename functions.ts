@@ -1,6 +1,5 @@
 import crypto from 'crypto';
 
-
 const algorithm = 'aes-256-ctr';
 const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3';
 
@@ -27,7 +26,7 @@ export const decrypt = (hash: WordHash) => {
     return decrpyted.toString()
 }
 
-interface WordHash {
+export interface WordHash {
     content: string;
     key: string;
     iv: string;

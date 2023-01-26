@@ -1,6 +1,5 @@
 import { WordServices } from '../services/WordServices';
 import express, { Request, Response } from 'express';
-import { checkPosition, decrypt } from '../functions';
 
 export class WordController {
   wordServices: WordServices;
@@ -14,7 +13,6 @@ export class WordController {
       try {
         const randomWordData = await this.wordServices.getRandomWordData();
         if (!randomWordData) res.status(404).json({messege: 'random word data not found'})
-        // res.cookie('wordData', randomWordData)
         res.status(200).json(randomWordData)
         
       } catch(e) {
@@ -23,13 +21,12 @@ export class WordController {
       }
     });
     this.server.post('/word/check', async (req: Request, res: Response) => {
-
+      
       const { guess, iv, content, key} = req.body;
       console.log('request body: ', req.body)
-      console.log('guess: ', guess)
-      const word = decrypt({iv, content, key})
-      const result = checkPosition(guess, word.toUpperCase());
-      console.log('word: ', word)
+      console.log('guess: ', guess);
+      const result = await this.wordServices.checkGuess(guess, {iv, content, key})
+      if (!result) res.status(503).json({messege: 'couldn\'t check word'})
       console.log('result: ', result)
       res.status(200).json(result)
       

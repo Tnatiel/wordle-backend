@@ -23,5 +23,4 @@ export class WordDao {
     console.log('couldn\'t get random word', e);
   }
  }
- // TODO TRANSFER WORD LOGIC TO SERVICES
 }

@@ -1,6 +1,5 @@
 import { Pool } from 'pg';
 import { createConnection } from '../config';
-import { CrudDao } from '../DaoCrud';
 import { User } from './User';
 import bcrypt from 'bcrypt';
 
@@ -11,10 +10,9 @@ export const hashData = async (data: unknown, rounds: number) => {
   return hash;
 };
 
-export class UsersDao extends CrudDao<User> {
+export class UsersDao {
   client: Pool;
   constructor() {
-    super();
     this.client = createConnection();
   }
 
