@@ -1,6 +1,7 @@
-import { User } from '../../dao/users/User';
-import { UsersDao } from '../../dao/users/UsersDao';
+
 import validator from 'validator';
+import { User } from '../dao/users/User';
+import { UsersDao } from '../dao/users/UsersDao';
 
 export const validateUser = (payload: unknown): User => {
   if (!payload) {

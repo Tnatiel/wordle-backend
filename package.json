@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register src/**/*.test.ts",
-    "start": "tsnd --respawn index.ts",
+    "test": " mocha -r ts-node/register src/**/*.test.ts",
+    "start": "tsnd --respawn src/index.ts",
     "db": "tsnd --respawn dao/config.ts",
     "format": "prettier --write **/*.ts",
     "lint": "eslint **/*.ts"

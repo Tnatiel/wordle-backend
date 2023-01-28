@@ -1,5 +1,5 @@
-import { WordServices } from '../src/services/WordServices';
 import express, { Request, Response } from 'express';
+import { WordServices } from '../services/WordServices';
 
 export class WordController {
   wordServices: WordServices;

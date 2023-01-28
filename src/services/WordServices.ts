@@ -1,5 +1,5 @@
 
-import { WordDao } from '../../dao/word/WordDao';
+import { WordDao } from '../../src/dao/word/WordDao';
 import { checkPosition, decrypt, encrypt, WordHash } from '../util';
 
 

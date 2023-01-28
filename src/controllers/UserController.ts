@@ -1,6 +1,6 @@
-import { UserServices } from '../src/services/UserServices';
 
 import express, { Request, Response } from 'express';
+import { UserServices } from '../services/UserServices';
 
 export class UserController {
   userServices: UserServices;

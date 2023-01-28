@@ -1,3 +1,5 @@
+import { expect } from "chai";
+import { createConnection } from "../config";
 
 
 const mockInvalidClient = {
@@ -9,7 +11,7 @@ const mockInvalidClient = {
     };
 
 describe('createConnection', () => {
-    // it('should connect to pg', () => {
-
-    // });
+    it('should throw error invalid client', () => {
+        expect(() => createConnection(mockInvalidClient)).to.throws()
+    });
 });
