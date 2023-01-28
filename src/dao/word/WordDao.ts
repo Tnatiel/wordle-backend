@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { Localclient } from '../../util';
+import { localClient } from '../../util';
 import { createConnection } from '../config';
 
 import { Word } from './Word';
@@ -7,7 +7,7 @@ import { Word } from './Word';
 export class WordDao {
   client: Pool;
   constructor() {
-    this.client = createConnection(Localclient);
+    this.client = createConnection(localClient);
   }
 
  async getRandomWordFromDb (): Promise<Word> {

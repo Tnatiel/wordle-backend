@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { hashData, Localclient } from '../../util';
+import { hashData, localClient } from '../../util';
 import { createConnection } from '../config';
 import { User } from './User';
 
@@ -8,7 +8,7 @@ import { User } from './User';
 export class UsersDao {
   client: Pool;
   constructor() {
-    this.client = createConnection(Localclient);
+    this.client = createConnection(localClient);
   }
 
   async add(t: User): Promise<boolean> {

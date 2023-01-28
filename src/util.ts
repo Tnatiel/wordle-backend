@@ -66,7 +66,7 @@ export const hashData = async (data: unknown, rounds: number) => {
   };
 
 
-export const Localclient = {
+export const localClient = {
 user: 'postgres',
 host: 'localhost',
 database: 'wordle',
