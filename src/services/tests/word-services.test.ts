@@ -28,7 +28,7 @@ describe('WordServices', () => {
             }
         });
     });
-    describe.only('checkGuess', () => {
+    describe('checkGuess', () => {
         it('should return the class array filled with correct and correct=true', async () => {
             const wordData = encrypt('HELLO');
             const guess = 'HELLO';
