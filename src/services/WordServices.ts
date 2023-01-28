@@ -14,7 +14,7 @@ export class WordServices {
     try {
       const randomWord = await this.dao.getRandomWordFromDb();
       if (randomWord) {
-        const wordHash = encrypt(randomWord.word);
+        const wordHash = encrypt(randomWord.word.toUpperCase());
         return wordHash;
       }
 
@@ -26,7 +26,7 @@ export class WordServices {
 
   async checkGuess (guess: string, wordData: WordHash){
     const gameWord = decrypt(wordData);
-    const result = checkPosition(guess, gameWord.toUpperCase());
+    const result = checkPosition(guess, gameWord);
     return result
   }
   

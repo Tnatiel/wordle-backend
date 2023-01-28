@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import { WordDao } from '../word/WordDao';
-
+import * as sinon from 'sinon' ;
 
 describe('WordDao', () => {
     let wordDao: WordDao;
@@ -18,16 +18,17 @@ describe('WordDao', () => {
           expect(word).to.have.property('word');
         });
     
-        // it('should throw an error if there is a problem with the query', async () => {
-        //   // You can use a mock library like Sinon to stub the client.query method 
-        //   // and make it throw an error so you can test the error handling
-        //   sinon.stub(wordDao.client, 'query').throws(new Error('Query error'));
-        //   try {
-        //     await wordDao.getRandomWordFromDb();
-        //   } catch (e) {
-        //     expect(e.message).to.equal('couldn\'t get random word');
-        //   }
-        // });
+        it('should throw an error if there is a problem with the query', async () => {
+          // You can use a mock library like Sinon to stub the client.query method 
+          // and make it throw an error so you can test the error handling
+          sinon.stub(wordDao.client, 'query').throws(new Error('Query error'));
+          try {
+            await wordDao.getRandomWordFromDb();
+          } catch (e) {
+            expect(e.message).to.equal('couldn\'t get random word');
+          }
+        });
+        
     });
 });
     

@@ -36,13 +36,12 @@ export interface WordHash {
 export const checkPosition = (guess: string, word: string) => {
     const classes: string[] = [];
     let correct = false
-    console.log('word: ', word)
-    console.log('guess: ', guess)
     for (let i = 0; i < guess.length; i++) {
         if (guess[i] === word[i]) {
             classes.push('correct'); 
             continue;
         }
+
         if (word.includes(guess[i])) {
             classes.push('present'); 
             continue;
@@ -51,7 +50,9 @@ export const checkPosition = (guess: string, word: string) => {
             classes.push('wrong'); 
             continue;
         }
+        console.log('cclasses', classes)
     }
+
     if (!classes.includes('wrong') 
 && !classes.includes('present')) correct = true;
      
