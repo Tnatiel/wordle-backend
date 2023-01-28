@@ -1,12 +1,9 @@
-import { expect } from "chai"
-import { checkPosition, decrypt, encrypt, hashData } from "./util"
+import { expect } from 'chai';
+import { checkPosition, decrypt, encrypt, hashData } from './util';
 
-
-
-describe.only('util', () => {
+describe('util', () => {
     describe('encrypt', () => {
         it('should return encrypted word data', () => {
-
             const res = encrypt('test');
             expect(res).to.be.an('object');
             expect(res.content).to.be.a('string');
@@ -41,22 +38,21 @@ describe.only('util', () => {
             expect(res.classes[2]).equals('wrong');
             expect(res.classes[3]).equals('wrong');
             expect(res.classes[4]).equals('wrong');
-            expect(res.correct).equal(false)
+            expect(res.correct).equal(false);
         });
         it('should return the class with length eaqul to guess length ', () => {
             const guess = 'HELLO';
             const res = checkPosition(guess, 'HZZZZ');
             expect(res.classes.length).equals(guess.length);
-            
         });
     });
 
-    describe('hashData',  () => {
+    describe('hashData', () => {
         it('should return a string different from inserted data', async () => {
-            const data = 'test'
+            const data = 'test';
             const res = await hashData(data, 10);
             expect(res).to.be.an('string');
             expect(res).not.equals(data);
-        })
-    })
+        });
+    });
 });

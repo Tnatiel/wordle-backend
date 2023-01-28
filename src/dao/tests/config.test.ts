@@ -1,7 +1,6 @@
 // import { expect } from "chai";
 // import { createConnection } from "../config";
 
-
 // const mockInvalidClient = {
 //     user: 'ss',
 //     host: 'd',

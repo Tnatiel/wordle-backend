@@ -1,10 +1,8 @@
-import { expect } from "chai";
-import * as sinon from "sinon";
-import { WordDao } from "../../dao/word/WordDao";
-import { encrypt } from "../../util";
-import { WordServices } from "../WordServices";
-
-
+import { expect } from 'chai';
+import * as sinon from 'sinon';
+import { WordDao } from '../../dao/word/WordDao';
+import { encrypt } from '../../util';
+import { WordServices } from '../WordServices';
 
 describe('WordServices', () => {
     let wordServices: WordServices;
@@ -20,7 +18,7 @@ describe('WordServices', () => {
             expect(res).to.have.property('key');
         });
         it('should throw an error', async () => {
-            sinon.stub(wordServices, 'getRandomWordData').throws(new Error('Service error'))
+            sinon.stub(wordServices, 'getRandomWordData').throws(new Error('Service error'));
             try {
                 await wordServices.getRandomWordData();
             } catch (e) {
@@ -32,25 +30,30 @@ describe('WordServices', () => {
         it('should return the class array filled with correct and correct=true', async () => {
             const wordData = encrypt('HELLO');
             const guess = 'HELLO';
-            const res = await wordServices.checkGuess(guess, wordData)
-            expect(res.classes[0]).equals('correct')
-            expect(res.classes[1]).equals('correct')
-            expect(res.classes[2]).equals('correct')
-            expect(res.classes[3]).equals('correct')
-            expect(res.classes[4]).equals('correct')
-            expect(res.correct).equal(true)
+            const res = await wordServices.checkGuess(guess, wordData);
+            expect(res.classes[0]).equals('correct');
+            expect(res.classes[1]).equals('correct');
+            expect(res.classes[2]).equals('correct');
+            expect(res.classes[3]).equals('correct');
+            expect(res.classes[4]).equals('correct');
+            expect(res.correct).equal(true);
         });
         it('should return the class array filled with aproppriate classes correct=false', async () => {
             const wordData = encrypt('HLEZZ');
             const guess = 'HELLO';
-            const res = await wordServices.checkGuess(guess, wordData)
-            expect(res.classes[0]).equals('correct')
-            expect(res.classes[1]).equals('present')
-            expect(res.classes[2]).equals('present')
-            expect(res.classes[3]).equals('present')
-            expect(res.classes[4]).equals('wrong')
-            expect(res.correct).equal(false)
+            const res = await wordServices.checkGuess(guess, wordData);
+            expect(res.classes[0]).equals('correct');
+            expect(res.classes[1]).equals('present');
+            expect(res.classes[2]).equals('present');
+            expect(res.classes[3]).equals('present');
+            expect(res.classes[4]).equals('wrong');
+            expect(res.correct).equal(false);
         });
-        
+        it('should return undefined invalid guess', async () => {
+            
+            const res = await wordServices.checkGuess('', { content: '', iv:'', key: ''});
+            
+            expect(res).equals(undefined);
+        });
     });
 });
