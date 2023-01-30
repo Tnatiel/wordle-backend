@@ -19,22 +19,22 @@ export class UsersDao {
                 values: [t.email, t.fname, t.lname, hashedPassword],
             };
             const res = await this.client.query(query);
-            const newUser: User = res.rows[0]
-            console.log(res.rows[0])
+            if (!res.rows[0].length) {
+                const newUser: User = res.rows[0]
+                console.log(res.rows[0])
+                return new User(newUser.email, newUser.fname, newUser.lname, newUser.user_token);
 
-            return new User(newUser.email, newUser.fname, newUser.lname, newUser.user_token);
+            } else {
+                return false
+            }
+
         } catch (e) {
-            return false;
+            console.log(e)
+            
         }
     }
 
-    compare(t: User): boolean {
-        throw new Error('Method not implemented.');
-    }
 
-    edit(t: User): Promise<User> {
-        throw new Error('Method not implemented.');
-    }
 
     async find(email: string, password: string): Promise<User | false> {
         console.log('in dao');

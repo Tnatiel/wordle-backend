@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { checkPosition, decrypt, encrypt, hashData } from './util';
+import { User } from './dao/users/User';
+import { checkPosition, decrypt, encrypt, hashData, validateUser } from './util';
 
 describe('util', () => {
     describe('encrypt', () => {
@@ -53,6 +54,148 @@ describe('util', () => {
             const res = await hashData(data, 10);
             expect(res).to.be.an('string');
             expect(res).not.equals(data);
+        });
+    });
+
+
+    describe.only('validateUser', () => {
+        
+        it(' should throw error, no payload', () => {
+            try {
+                validateUser(undefined)
+            }
+            catch (e) {
+                expect(e.message).to.equal('empty value is not a user')
+
+            }
+        });
+        it(' should throw error, invalid email', () => {
+
+            const mockUser = {
+                email: 'abc',
+                fname: 'aa',
+                lname: 'aa',
+                password: '123'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('email not valid')
+
+            }
+        });
+        it(' should throw error, last name and first name should be string', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: '1',
+                lname: '1',
+                password: '123'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('last name and first name should be string')
+
+            }
+        });
+        it(' should throw error, first name <3', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: 'a',
+                lname: 'aaaa',
+                password: '123'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('first name must be 3 to 30 chars length')
+
+            }
+        });
+        it(' should throw error, first name > 30', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                lname: 'aaaa',
+                password: '123'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('first name must be 3 to 30 chars length')
+
+            }
+        });
+        it(' should throw error, last name <3', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: 'aaaa',
+                lname: 'a',
+                password: '123'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('last name must be 3 to 30 chars length')
+
+            }
+        });
+        it(' should throw error, last name > 30', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: 'aaaa',
+                lname: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                password: '123'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('last name must be 3 to 30 chars length')
+
+            }
+        });
+        it(' should throw error, password <3', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: 'aaaa',
+                lname: 'aaaa',
+                password: '21'
+            }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('password must be 6 to 30 chars length')
+
+            }
+        });
+        it(' should throw error, password > 30', () => {
+
+            const mockUser = {
+                email: 'abc@hotmail.com',
+                fname: 'aaaa',
+                lname: 'aaaaa',
+                password: '1234567890123456789012345678901265'
+                }
+            try {
+                validateUser(mockUser)
+            }
+            catch (e) {
+                expect(e.message).to.equal('password must be 6 to 30 chars length')
+
+            }
         });
     });
 });

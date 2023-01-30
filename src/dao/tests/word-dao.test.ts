@@ -18,8 +18,7 @@ describe('WordDao', () => {
         });
 
         it('should throw an error if there is a problem with the query', async () => {
-            // You can use a mock library like Sinon to stub the client.query method
-            // and make it throw an error so you can test the error handling
+            
             sinon.stub(wordDao.client, 'query').throws(new Error('Query error'));
             try {
                 await wordDao.getRandomWordFromDb();
