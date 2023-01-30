@@ -5,6 +5,11 @@
 ## Introduction
 A backend for the word-based game Wordle, written in TypeScript and designed in MVC style. The backend communicates with a Postgres database and provides endpoints for retrieving and checking words, as well as allowing users to save their information and sign in.
 
+## Prerequisites
+* Node.js and npm
+* TypeScript
+* Postgres
+
 ## Getting Started
 1. Clone the repository to your local machine
 ``` bash
