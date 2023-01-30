@@ -60,12 +60,11 @@ describe('UsersDao', () => {
         });
         
     });
-    describe.only('find', () => {
+    describe('find', () => {
 
 
         it('should return user with properties', async () => {
 
-            // it has to be a real user for the test to pass
             const email = 'rick11@sssssss.com';
             const password = '111111';
             
@@ -87,18 +86,29 @@ describe('UsersDao', () => {
                 expect(e.message).to.equal("Query error");
             }
         });
-        it.only('should return false, invalid user', async () => {
+        it('should return undefined, user dont exist', async () => {
             const email = 'rick11@sssssrrrrss.com';
+            const password = '22';
+
+            try {
+                const res = await usersDao.find(email, password);
+                expect(res).equals(undefined)
+            } catch (e) {
+                expect(e.message).to.equal("Query error");
+            }
+        });
+        it('should return false, invalid user', async () => {
+            const email = 'rick11@sssssss.com';
             const password = '22';
             
             const compare = (...args: any[]) => {
-                
                 return false;
               };
               
               sinon.stub(bcrypt, 'compare').callsFake(compare);
             try {
-                await usersDao.find(email, password);
+                const res = await usersDao.find(email, password);
+                expect(res).equals(false)
             } catch (e) {
                 expect(e.message).to.equal("Query error");
             }

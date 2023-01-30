@@ -35,6 +35,7 @@ export class UsersDao {
 
         try {
             const res = await this.client.query(query);
+            if(!res) return
             const isValid = await bcrypt.compare(password ,res.rows[0].user_token);
             if (isValid) return res.rows[0];
             return false;

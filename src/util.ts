@@ -75,7 +75,7 @@ export const localClient = {
 };
 
 
-export const validateUser = (payload: unknown): User => {
+export const validateNewUser = (payload: unknown): User => {
     if (!payload) {
         throw new Error('empty value is not a user');
     }

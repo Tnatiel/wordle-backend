@@ -10,7 +10,7 @@ describe('WordServices', () => {
         wordServices = new WordServices(new WordDao());
     });
     describe('getRandomWordData', () => {
-        it('should return get a object of encrypted word data', async () => {
+        it('should get a object of encrypted word data', async () => {
             const res = await wordServices.getRandomWordData();
             expect(res).to.be.an('object');
             expect(res).to.have.property('iv');

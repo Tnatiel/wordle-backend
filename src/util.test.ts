@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { User } from './dao/users/User';
-import { checkPosition, decrypt, encrypt, hashData, validateUser } from './util';
+import { checkPosition, decrypt, encrypt, hashData, validateNewUser } from './util';
 
 describe('util', () => {
     describe('encrypt', () => {
@@ -62,7 +62,7 @@ describe('util', () => {
         
         it(' should throw error, no payload', () => {
             try {
-                validateUser(undefined)
+                validateNewUser(undefined)
             }
             catch (e) {
                 expect(e.message).to.equal('empty value is not a user')
@@ -78,7 +78,7 @@ describe('util', () => {
                 password: '123'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('email not valid')
@@ -94,7 +94,7 @@ describe('util', () => {
                 password: '123'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('last name and first name should be string')
@@ -110,7 +110,7 @@ describe('util', () => {
                 password: '123'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('first name must be 3 to 30 chars length')
@@ -126,7 +126,7 @@ describe('util', () => {
                 password: '123'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('first name must be 3 to 30 chars length')
@@ -142,7 +142,7 @@ describe('util', () => {
                 password: '123'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('last name must be 3 to 30 chars length')
@@ -158,7 +158,7 @@ describe('util', () => {
                 password: '123'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('last name must be 3 to 30 chars length')
@@ -174,7 +174,7 @@ describe('util', () => {
                 password: '21'
             }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('password must be 6 to 30 chars length')
@@ -190,7 +190,7 @@ describe('util', () => {
                 password: '1234567890123456789012345678901265'
                 }
             try {
-                validateUser(mockUser)
+                validateNewUser(mockUser)
             }
             catch (e) {
                 expect(e.message).to.equal('password must be 6 to 30 chars length')
