@@ -50,9 +50,8 @@ describe('WordServices', () => {
             expect(res.correct).equal(false);
         });
         it('should return undefined invalid guess', async () => {
-            
-            const res = await wordServices.checkGuess('', { content: '', iv:'', key: ''});
-            
+            const res = await wordServices.checkGuess('', { content: '', iv: '', key: '' });
+
             expect(res).equals(undefined);
         });
     });

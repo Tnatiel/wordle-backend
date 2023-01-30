@@ -22,25 +22,24 @@ export class WordController {
         });
 
         this.server.post('/word/check', express.json(), async (req: Request, res: Response) => {
-          const data =req.body
-          try {
-              if (data['iv'] === undefined || data['content'] === undefined || data['key'] === undefined || data['guess'] === undefined) {
-                return res.status(400).send({message: 'bad request'});
-              }
-              const { guess, iv, content, key } = req.body;
-              const word = decrypt({iv, content, key})
-              console.log(word)
-              
-              console.log('request body: ', req.body);
-              console.log('guess: ', guess);
-              const result = await this.wordServices.checkGuess(guess, { iv, content, key });
-              console.log('result: ', result);
-              res.status(200).send(result);
-          } catch (error) {
-              console.error(error);
-              res.status(404).json({ messege: "word not found" });
-          }
-      });
-      
+            const data = req.body;
+            try {
+                if (data['iv'] === undefined || data['content'] === undefined || data['key'] === undefined || data['guess'] === undefined) {
+                    return res.status(400).send({ message: 'bad request' });
+                }
+                const { guess, iv, content, key } = req.body;
+                const word = decrypt({ iv, content, key });
+                console.log(word);
+
+                console.log('request body: ', req.body);
+                console.log('guess: ', guess);
+                const result = await this.wordServices.checkGuess(guess, { iv, content, key });
+                console.log('result: ', result);
+                res.status(200).send(result);
+            } catch (error) {
+                console.error(error);
+                res.status(404).json({ messege: 'word not found' });
+            }
+        });
     }
 }

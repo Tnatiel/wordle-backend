@@ -18,7 +18,6 @@ describe('WordDao', () => {
         });
 
         it('should throw an error if there is a problem with the query', async () => {
-            
             sinon.stub(wordDao.client, 'query').throws(new Error('Query error'));
             try {
                 await wordDao.getRandomWordFromDb();

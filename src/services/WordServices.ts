@@ -22,7 +22,7 @@ export class WordServices {
 
     async checkGuess(guess: string, wordData: WordHash) {
         if (!guess.length) {
-            return
+            return;
         }
         const gameWord = decrypt(wordData);
         const result = checkPosition(guess, gameWord);

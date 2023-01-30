@@ -9,32 +9,31 @@ export class UserController {
     }
 
     configureRoutes() {
-        this.server.post('/user/sign-in',  async (req: Request, res: Response) => {
-            
+        this.server.post('/user/sign-in', async (req: Request, res: Response) => {
             try {
-                const userExist = await this.userServices.validateUser(req.body.email, req.body.password)
+                const userExist = await this.userServices.validateUser(req.body.email, req.body.password);
                 if (userExist) {
                     res.status(200).json(userExist);
                 } else {
-                    return res.status(200).json(userExist)
+                    return res.status(404).json(userExist);
                 }
             } catch (e) {
-                console.log(e)
+                console.log(e);
+                return res.status(500).json({ message: 'Internal server error' });
             }
         });
 
-        this.server.post('/user/sign-up', express.json(),async (req: Request, res: Response) => {
+        this.server.post('/user/sign-up', express.json(), async (req: Request, res: Response) => {
             try {
                 const user = await this.userServices.createUser(req.body);
                 if (user) {
                     res.status(201).send(user);
                 } else {
-                    return res.status(200).json(user)
+                    return res.status(400).json({ userCreated: user });
                 }
-
             } catch (e) {
                 console.log(e);
-                return res.status(404).json({message: e})
+                return res.status(500).json({ message: e.messege });
             }
         });
     }

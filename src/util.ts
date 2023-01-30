@@ -74,7 +74,6 @@ export const localClient = {
     port: 5432,
 };
 
-
 export const validateNewUser = (payload: unknown): User => {
     if (!payload) {
         throw new Error('empty value is not a user');

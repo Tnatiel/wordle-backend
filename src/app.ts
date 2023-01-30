@@ -12,5 +12,5 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
-const userController = new UserController(app, new UserServices(new UsersDao()));
-const wordController = new WordController(app, new WordServices(new WordDao()));
+new UserController(app, new UserServices(new UsersDao()));
+new WordController(app, new WordServices(new WordDao()));

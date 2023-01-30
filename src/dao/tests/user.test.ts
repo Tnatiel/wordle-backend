@@ -10,7 +10,7 @@ describe('user class', () => {
         expect(u.password).equals('');
     });
     it('should have argument properties', () => {
-        const u = new User( 'aa@aa', 'aa', 'bb', '123');
+        const u = new User('aa@aa', 'aa', 'bb', '123');
         expect(u.email).equals('aa@aa');
         expect(u.fname).equals('aa');
         expect(u.lname).equals('bb');
