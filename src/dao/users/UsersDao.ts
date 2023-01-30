@@ -12,26 +12,16 @@ export class UsersDao {
     }
 
     async add(t: User): Promise<boolean | User> {
-        try {
+        // try {
             const hashedPassword = await hashData(t.password, 10);
             const query = {
                 text: 'INSERT INTO public.users(email, fname, lname, user_token) VALUES ($1, $2, $3, $4) RETURNING *',
                 values: [t.email, t.fname, t.lname, hashedPassword],
             };
             const res = await this.client.query(query);
-            if (!res.rows[0].length) {
-                const newUser: User = res.rows[0]
-                console.log(res.rows[0])
-                return new User(newUser.email, newUser.fname, newUser.lname, newUser.user_token);
-
-            } else {
-                return false
-            }
-
-        } catch (e) {
-            console.log(e)
-            
-        }
+            if (res.rows.length === 0) return false            
+            return res.rows[0];
+    
     }
 
 

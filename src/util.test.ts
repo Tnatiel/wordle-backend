@@ -58,7 +58,7 @@ describe('util', () => {
     });
 
 
-    describe.only('validateUser', () => {
+    describe('validateUser', () => {
         
         it(' should throw error, no payload', () => {
             try {
