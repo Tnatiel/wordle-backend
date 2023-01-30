@@ -51,7 +51,6 @@ export const checkPosition = (guess: string, word: string) => {
             classes.push('wrong');
             continue;
         }
-        console.log('cclasses', classes);
     }
 
     if (!classes.includes('wrong') && !classes.includes('present')) correct = true;

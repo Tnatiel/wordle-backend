@@ -29,12 +29,8 @@ export class WordController {
                 }
                 const { guess, iv, content, key } = req.body;
                 const word = decrypt({ iv, content, key });
-                console.log(word);
-
-                console.log('request body: ', req.body);
-                console.log('guess: ', guess);
+                console.log(word); // I'm leaving this log so it possible to know the word
                 const result = await this.wordServices.checkGuess(guess, { iv, content, key });
-                console.log('result: ', result);
                 res.status(200).send(result);
             } catch (error) {
                 console.error(error);

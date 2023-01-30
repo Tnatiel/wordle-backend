@@ -23,7 +23,6 @@ export class UsersDao {
     }
 
     async find(email: string, password: string): Promise<User | false> {
-        console.log('in dao');
         const query = {
             text: 'SELECT * FROM public.users WHERE email = $1',
             values: [email],
