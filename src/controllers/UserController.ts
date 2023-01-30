@@ -9,16 +9,26 @@ export class UserController {
     }
 
     configureRoutes() {
-        this.server.get('/user', async (req: Request, res: Response) => {
-            console.log(req.body);
-            console.log(req.body.id);
-            const user = await this.userServices.findUserById(+req.body.id);
-            res.status(200).send(user);
+        this.server.post('/user/sign-in',  async (req: Request, res: Response) => {
+            try {
+                const userExist = await this.userServices.findUserById(req.body.email, req.body.password)
+                if (userExist) {
+                    res.status(200).json(userExist);
+                }
+            } catch (e) {
+                console.log(e)
+            }
         });
 
-        this.server.post('/user', async (req: Request, res: Response) => {
-            const user = await this.userServices.createUser(req.body);
-            res.status(201).send(user);
+        this.server.post('/user/sign-up', express.json(),async (req: Request, res: Response) => {
+            try {
+                const user = await this.userServices.createUser(req.body);
+                res.status(201).send(user);
+
+            } catch (e) {
+                console.log(e);
+                return res.status(404).json({message: e})
+            }
         });
     }
 }

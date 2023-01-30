@@ -35,12 +35,12 @@ export class UserServices {
 
     async createUser(resource: User) {
         const userIsValid = validateUser(resource);
-        if (userIsValid) await this.dao.add(userIsValid);
+        if (userIsValid) return await this.dao.add(userIsValid);
     }
 
-    async findUserById(userId: number) {
-        const user = await this.dao.find(userId);
-        if (!user) throw new Error("coundn't find user with that id");
+    async findUserById(email: string, password: string) {
+        const user = await this.dao.find(email, password);
+        
         return user;
     }
 }
