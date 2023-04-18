@@ -1,8 +1,6 @@
-# Wordle Frontend - A Typescript Game <a href="https://github.com/Tnatiel/wordle-front" target='_blank'><img src="https://img.shields.io/badge/Frontend-Repo-blue?style=flat-square" alt="Frontend Repo" />
+# Wordle Backend - A Typescript Game <a href="https://github.com/Tnatiel/wordle-front" target='_blank'><img src="https://img.shields.io/badge/Frontend-Repo-blue?style=flat-square" alt="Frontend Repo" />
 </a>
-
-
-# Wordle Backend
+ 
 ## Introduction
 A backend for the word-based game Wordle, written in TypeScript and designed in MVC style. The backend communicates with a Postgres database and provides endpoints for retrieving and checking words, as well as allowing users to save their information and sign in.
 
@@ -13,21 +11,21 @@ A backend for the word-based game Wordle, written in TypeScript and designed in 
 
 ## Getting Started
 1. Clone the repository to your local machine
-``` bash
-git clone https://github.com/Tnatiel/wordle-backend/tree/tests
-```
+
+        git clone https://github.com/Tnatiel/wordle-backend/tree/tests
+
 2. Navigate to the project folder in your terminal
-``` bash
-cd wordle-backend
-```
+
+        cd wordle-backend
+
 3. Run npm install to install all the required dependencies
-``` bash
-npm install
-```
+
+        npm install
+
 4. Run npm start to start the backend server
-``` bash
-npm start
-```
+
+        npm start
+
 ## Scripts
 
 ### `npm start`
